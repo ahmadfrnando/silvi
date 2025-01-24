@@ -118,13 +118,15 @@
     <section id="berita" class="bg-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12">Berita Desa</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-                <div class="p-6 bg-white shadow rounded-lg">
-                    <img src="{{ asset('background.jpg') }}" class="w-full h-40 object-cover rounded-lg mb-6" alt="test">
-                    <h3 class="text-lg font-bold mb-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</h3>
-                    <p class="text-gray-700 mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis necessitatibus, velit temporibus iusto minus quod accusamus deserunt corporis eaque ullam!</p>
-                    <a href="#" class="text-green-600 font-bold inline-block">Baca Selengkapnya</a>
+            <div class="row">
+                @foreach($berita as $item)
+                <div class="p-6 bg-white shadow rounded-lg md:grid-cols-2 lg:grid-cols-3">
+                    <img src="{{ asset('storage/media/'. $item->media) }}" class="w-full h-40 object-cover rounded-lg mb-6" alt="{{ $item->judul }}">
+                    <h3 class="text-lg font-bold mb-4">{{ $item->judul }}</h3>
+                    <p class="text-gray-700 mb-4">{{  Str::limit($item->isi, 150) }}</p>
+                    <a href="/detail/{{ $item->id }}" class="text-green-600 font-bold inline-block">Baca Selengkapnya</a>
                 </div>
+                @endforeach
             </div>
         </div>
     </section>

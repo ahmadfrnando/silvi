@@ -52,7 +52,7 @@
                         </div>
 
                         <!-- Jumlah -->
-                        <img src="{{ asset('storage/' . $berita->media) }}" alt="{{ $berita->judul }}">
+                        <img src="{{ asset('storage/media' . $berita->media) }}" alt="{{ $berita->judul }}">
                         <div>
                             <label for="media" class="block font-medium text-sm text-gray-700 mb-1">Media</label>
                             <input 

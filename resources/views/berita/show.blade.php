@@ -14,7 +14,7 @@
                         <li><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($berita->tanggal)->formatLocalized('%d %B %Y') }}</li>
                         <li><strong>Judul:</strong> {{ $berita->judul }}</li>
                         <li><strong>Isi:</strong> {{ $berita->isi }}</li>
-                        <li><strong>Media:</strong> <img src="{{ asset('storage/' . $berita->media) }}" alt="{{ $berita->judul }}"></li>
+                        <li><strong>Media:</strong> <img src="{{ asset('storage/media/' . $berita->media) }}" width="500" height="500" alt="{{ $berita->judul }}"></li>
                     </ul>
                     <div class="mt-4">
                         <a href="{{ route('berita.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Kembali</a>

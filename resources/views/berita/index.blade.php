@@ -61,8 +61,6 @@
                                 <th class="px-4 py-2 text-left font-semibold text-sm text-gray-600">No.</th>
                                 <th class="px-4 py-2 text-left font-semibold text-sm text-gray-600">Tanggal</th>
                                 <th class="px-4 py-2 text-left font-semibold text-sm text-gray-600">Judul</th>
-                                <th class="px-4 py-2 text-left font-semibold text-sm text-gray-600">Isi</th>
-                                <th class="px-4 py-2 text-left font-semibold text-sm text-gray-600">Media</th>
                                 <th class="px-4 py-2 text-left font-semibold text-sm text-gray-600">Aksi</th>
                             </tr>
                         </thead>
@@ -71,9 +69,7 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ $loop->iteration }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700">{{ \Carbon\Carbon::parse($item->tanggal)->formatLocalized('%d %B %Y') }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700 truncate md:text-clip">{{ $item->judul }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700 truncate md:text-clip">{{ $item->isi }}</td>
-                                <td class="px-4 py-2 text-sm text-gray-700">{{ $item->media }}</td>
+                                <td class="px-4 py-2 text-sm text-gray-700 truncate md:text-clip">{{ Str::limit($item->judul, 50) }}</td>
                                 <td class="px-4 py-2 text-sm text-gray-700 flex space-x-4">
                                     <a href="{{ route('berita.show', $item->id) }}" class="inline-flex items-center text-green-500 hover:text-green-700">
                                         <i class="fas fa-eye mr-1"></i> Detail

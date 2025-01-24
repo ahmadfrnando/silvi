@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\File;
 use App\Models\Berita;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class BeritaController extends Controller
 {
@@ -16,13 +17,13 @@ class BeritaController extends Controller
     public function index(Request $request)
     {
         $query = Berita::query();
-        if($request->filled('tanggal')) {
+        if ($request->filled('tanggal')) {
             $query->whereDate('tanggal', $request->tanggal);
         }
         if ($request->filled('search')) {
-            $query->where(function($q) use ($request) {
+            $query->where(function ($q) use ($request) {
                 $q->where('judul', 'like', '%' . $request->search . '%')
-                  ->orWhere('isi', 'like', '%' . $request->search . '%');
+                    ->orWhere('isi', 'like', '%' . $request->search . '%');
             });
         }
 
@@ -51,33 +52,23 @@ class BeritaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        // dd($request->all());
+    {
         try {
             $validatedData = $request->validate([
                 'judul' => 'required|string|max:255',
                 'isi' => 'required|string',
                 'tanggal' => 'required|date',
+                'media' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-    
-            if($request->hasFile('media')) {
-                $request->validate([
-                    'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                ]);
-            
+
+            if ($request->hasFile('media')) {
                 $file = $request->file('media');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
-                $dir = public_path('media');
-                if(!File::exists($dir)) {
-                    File::makeDirectory($dir, 0777, true, true);
-                }
-                $file->move($dir, $filename);
-            
-                // Tambahkan media ke $validatedData
+                $file->storeAs('media', $filename, 'public');
+
                 $validatedData['media'] = $filename;
             }
 
-            dd($validatedData);
             Berita::create($validatedData);
 
             return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!');
@@ -86,34 +77,36 @@ class BeritaController extends Controller
                 ->withErrors($e->validator)
                 ->withInput();
         } catch (\Exception $e) {
+            Log::error('Error saat menyimpan berita: ' . $e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menambah data.');
         }
-
-        // $request->validate([
-        //     'judul' => 'required|string|max:255',
-        //     'isi' => 'required|string|max:255',
-        //     'tanggal' => 'required|date',
-        // ]);
-
-        // if($request->hasFile('media')) {
-        //     $request->validate([
-        //         'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     ]);
-
-        //     $file = $request->file('media');
-        //     $filename = time() . '.' . $file->getClientOriginalExtension();
-        //     $dir = public_path('media');
-        //     if(!File::exists($dir)) {
-        //         File::makeDirectory($dir, 0777, true, true);
-        //     }
-        //     $file->move($dir, $filename);
-        //     $request->merge(['media' => $filename]);
-        // }
-
-        // Berita::create($request->all());
-
-        // return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!');
     }
+
+    // $request->validate([
+    //     'judul' => 'required|string|max:255',
+    //     'isi' => 'required|string|max:255',
+    //     'tanggal' => 'required|date',
+    // ]);
+
+    // if($request->hasFile('media')) {
+    //     $request->validate([
+    //         'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    //     ]);
+
+    //     $file = $request->file('media');
+    //     $filename = time() . '.' . $file->getClientOriginalExtension();
+    //     $dir = public_path('media');
+    //     if(!File::exists($dir)) {
+    //         File::makeDirectory($dir, 0777, true, true);
+    //     }
+    //     $file->move($dir, $filename);
+    //     $request->merge(['media' => $filename]);
+    // }
+
+    // Berita::create($request->all());
+
+    // return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!');
+    // }
 
 
     /**
@@ -157,7 +150,7 @@ class BeritaController extends Controller
             'tanggal' => 'required|date',
         ]);
 
-        if($request->hasFile('media')) {
+        if ($request->hasFile('media')) {
             $request->validate([
                 'media' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
@@ -165,7 +158,7 @@ class BeritaController extends Controller
             $file = $request->file('media');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $dir = public_path('media');
-            if(!File::exists($dir)) {
+            if (!File::exists($dir)) {
                 File::makeDirectory($dir, 0777, true, true);
             }
             $file->move($dir, $filename);

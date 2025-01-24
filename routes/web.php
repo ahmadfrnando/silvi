@@ -17,9 +17,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
-        'statistikPenduduk' => \App\Models\StatistikPenduduk::first()
+        'statistikPenduduk' => \App\Models\StatistikPenduduk::first(),
+        'berita' => \App\Models\Berita::take(3)->get()
     ]);
 });
+Route::get('/detail/{berita}', function (\App\Models\Berita $berita) {
+    return view('detail-berita', [
+        'berita' => $berita
+    ]);
+})->name('detail-berita');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
