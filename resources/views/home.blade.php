@@ -118,16 +118,17 @@
     <section id="berita" class="bg-gray-100">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12">Berita Desa</h2>
-            <div class="row">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                 @foreach($berita as $item)
-                <div class="p-6 bg-white shadow rounded-lg md:grid-cols-2 lg:grid-cols-3">
-                    <img src="{{ asset('storage/media/'. $item->media) }}" class="w-full h-40 object-cover rounded-lg mb-6" alt="{{ $item->judul }}">
-                    <h3 class="text-lg font-bold mb-4">{{ $item->judul }}</h3>
-                    <p class="text-gray-700 mb-4">{{  Str::limit($item->isi, 150) }}</p>
-                    <a href="/detail/{{ $item->id }}" class="text-green-600 font-bold inline-block">Baca Selengkapnya</a>
+                <div class="bg-white rounded-lg shadow p-4">
+                    <img src="{{ asset('storage/media/' . $item->media) }}" class="w-full h-40 object-cover rounded-lg mb-4" alt="{{ $item->judul }}">
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">{{ $item->judul }}</h3>
+                    <p class="text-sm text-gray-600 mb-4">{{ Str::limit($item->isi, 150) }}</p>
+                    <a href="/detail/{{ $item->id }}" class="text-blue-500 hover:underline font-medium">Baca Selengkapnya</a>
                 </div>
                 @endforeach
             </div>
+
         </div>
     </section>
 
