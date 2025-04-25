@@ -88,7 +88,11 @@
             <h2 class="text-3xl font-bold text-center mb-12">Peta Desa</h2>
             <div class="flex justify-center">
                 <!-- <iframe src="https://www.google.com/maps/embed?..." class="w-full md:w-3/4 h-96 rounded-lg shadow" frameborder="0"></iframe> -->
+                @if(!empty($statistikPenduduk->kordinat))
                 <iframe src="{{ $statistikPenduduk->kordinat }}" class="w-full md:w-3/4 h-96 rounded-lg shadow" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                @else
+                <div>Kordinat belum diisi</div>
+                @endif
             </div>
         </div>
     </section>
