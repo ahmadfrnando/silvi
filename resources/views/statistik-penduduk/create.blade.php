@@ -33,13 +33,13 @@
                                 required>
                         </div>
                         <div>
-                            <label for="jumlah_laki_laki" class="block font-medium text-sm text-gray-700 mb-1">Jumlah Penduduk</label>
+                            <label for="jumlah_laki_laki" class="block font-medium text-sm text-gray-700 mb-1">Jumlah Laki-laki</label>
                             <input
                                 type="number"
                                 name="jumlah_laki_laki"
                                 id="jumlah_laki_laki"
                                 class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                placeholder="Masukkan Jumlah Penduduk"
+                                placeholder="Masukkan Jumlah Penduduk Laki - laki"
                                 required>
                         </div>
                         <div>
