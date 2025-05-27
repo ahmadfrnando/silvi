@@ -75,7 +75,7 @@
                                 placeholder="Masukkan Jumlah Perempuan"
                                 required>
                         </div>
-                        <div>
+                        <!-- <div>
                             <label for="kordinat" class="block font-medium text-sm text-gray-700 mb-1">Kordinat</label>
                             <textarea
                                 type="text"
@@ -84,7 +84,7 @@
                                 value="{{ $statistikPenduduk->kordinat }}"
                                 class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 required>{{ $statistikPenduduk->kordinat }}</textarea>
-                        </div>
+                        </div> -->
 
                         <!-- Tombol Update dan Kembali -->
                         <div class="flex space-x-4">

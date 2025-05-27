@@ -46,7 +46,7 @@ class StatistikPendudukController extends Controller
             'jumlah_penduduk' => ['required', 'integer'],
             'jumlah_laki_laki' => ['required', 'integer'],
             'jumlah_perempuan' => ['required', 'integer'],
-            'kordinat' => ['required', 'string'],
+            // 'kordinat' => ['required', 'string'],
         ]);
 
         StatistikPenduduk::create($request->all());
