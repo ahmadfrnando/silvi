@@ -92,7 +92,7 @@ class StatistikPendudukController extends Controller
                 'jumlah_penduduk' => 'required|integer|min:0',
                 'jumlah_laki_laki' => 'required|integer|min:0',
                 'jumlah_perempuan' => 'required|integer|min:0',
-                'kordinat' => 'required|string',
+                // 'kordinat' => 'required|string',
             ]);
 
             $statistikPenduduk = StatistikPenduduk::findOrFail($id);
