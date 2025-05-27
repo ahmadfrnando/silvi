@@ -83,8 +83,7 @@
                                 id="kordinat"
                                 value="{{ $statistikPenduduk->kordinat }}"
                                 class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                placeholder="{{ $statistikPenduduk->kordinat }}"
-                                required></textarea>
+                                required>{{ $statistikPenduduk->kordinat }}</textarea>
                         </div>
 
                         <!-- Tombol Update dan Kembali -->
