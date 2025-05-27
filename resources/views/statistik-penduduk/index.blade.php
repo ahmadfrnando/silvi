@@ -37,9 +37,9 @@
                         </div>
 
                         <!-- Data Koordinat -->
-                        <div class="flex items-center col-span-2 md:col-span-2">
+                        <!-- <div class="flex items-center col-span-2 md:col-span-2">
                             <iframe src="{{ $statistikPenduduk->kordinat }}" class="w-full md:w-3/4 h-96 rounded-lg shadow" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Tombol Aksi -->
