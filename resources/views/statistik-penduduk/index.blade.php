@@ -38,7 +38,7 @@
 
                         <!-- Data Koordinat -->
                         <div class="flex items-center col-span-2 md:col-span-2">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63723.29834908594!2d98.27382614660637!3d3.4215806175097203!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3030dd299b2e0669%3A0x51b0ab509a4a4b0b!2sPerkebunan%20Tambunan%2C%20Kec.%20Salapian%2C%20Kabupaten%20Langkat%2C%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1737310164611!5m2!1sid!2sid" class="w-full md:w-3/4 h-96 rounded-lg shadow" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="{{ $statistikPenduduk->kordinat }}" class="w-full md:w-3/4 h-96 rounded-lg shadow" frameborder="0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
 
