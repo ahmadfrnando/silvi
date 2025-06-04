@@ -146,7 +146,7 @@
                         return {
                             results: data.map(res => {
                                 return {
-                                    text: res.nama_merk,
+                                    text: res.nama_merk ?? '',
                                     id: res.id
                                 }
                             })
@@ -185,7 +185,7 @@
             }
 
             var merkId = '{{ $aset->id_merk }}';
-            var merkNama = '{{ $aset->merk->nama_merk }}';
+            var merkNama = '{{ $aset->merk->nama_merk ?? '' }}';
 
             if (merkId) {
                 // Buat option baru dan trigger select2 untuk preselect
