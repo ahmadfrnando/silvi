@@ -35,10 +35,10 @@ class RedirectIfAuthenticated
 
             if ($user->role === 'admin') {
                 return redirect('/admin/dashboard');
-            } elseif ($user->role === 'super-admin') {
+            } elseif ($user->role === 'super admin') {
                 return redirect('/super-admin/dashboard');
             } else {
-                return redirect('/dashboard');
+                return redirect('/login');
             }
         }
 

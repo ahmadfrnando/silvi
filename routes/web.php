@@ -15,7 +15,6 @@ use App\Http\Controllers\Admin\MerkController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\StatistikPendudukController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\LaporanController;
 
 use App\Http\Controllers\Superadmin\DashboardController as SuperDashboardController;
 use App\Http\Controllers\Superadmin\ProfileController as SuperProfileController;
@@ -47,9 +46,9 @@ Route::get('/login', function (Request $request) {
         if ($user->role === 'admin') {
             return redirect('/admin/dashboard');
         } elseif ($user->role === 'super admin') {
-            return redirect('/super-admin/dashboard');
+            return redirect('/super-admin/dashboard/index');
         } else {
-            return redirect('/dashboard');
+            return redirect('/login');
         }
     }
     return view('auth.login'); // tampilan login biasa kalau belum login
