@@ -58,14 +58,14 @@
                                 required>
                         </div>
                         <div>
-                            <label for="password_confirmed" class="block font-medium text-sm text-gray-700 mb-1">Konfirmasi Password</label>
+                            <label for="password_confirmation" class="block font-medium text-sm text-gray-700 mb-1">Konfirmasi Password</label>
                             <input
                                 type="password"
-                                name="password_confirmed"
-                                id="password_confirmed"
+                                name="password_confirmation"
+                                id="password_confirmation"
                                 value="{{ $user->password }}"
                                 class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                                placeholder="Masukkan password_confirmed pegawai"
+                                placeholder="Masukkan kembali password pegawai"
                                 required>
                         </div>
 

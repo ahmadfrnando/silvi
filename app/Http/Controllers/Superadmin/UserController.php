@@ -128,17 +128,21 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'username' => 'required|string|max:255|unique:users',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|string|confirmed|max:255',
-        ]);
-
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-
-        return redirect()->route('super-admin.user.index')->with('success', 'pengguna berhasil diperbarui!');
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'username' => 'required|string|max:255|unique:users,username,' . $id,
+                'email' => 'required|email|max:255|unique:users,email,' . $id,
+                'password' => 'required|string|confirmed|max:255',
+            ]);
+    
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+    
+            return redirect()->route('super-admin.user.index')->with('success', 'pengguna berhasil diperbarui!');
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage())->withInput();
+        }
     }
 
 
