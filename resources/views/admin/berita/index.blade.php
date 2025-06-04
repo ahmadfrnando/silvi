@@ -10,8 +10,8 @@
             <div class="bg-white shadow rounded-lg">
                 <div class="p-6">
                     <!-- Tombol Tambah Merk -->
-                    <a href="{{ route('admin.aset.create') }}" class="btn btn-primary mb-4">
-                        <i class="bi bi-plus-circle"></i> Tambah Aset
+                    <a href="{{ route('admin.berita.create') }}" class="btn btn-primary mb-4">
+                        <i class="bi bi-plus-circle"></i> Tambah Berita
                     </a>
                     <!-- Tabel Data Merk -->
                     <table class="table table-striped table-bordered datatable">
