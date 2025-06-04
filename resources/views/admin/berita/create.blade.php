@@ -27,11 +27,11 @@
 
             <div class="bg-white shadow rounded-lg overflow-hidden">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                    <form action="{{ route('admin.berita.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 row">
                         @csrf
 
                         <!-- Judul Berita -->
-                        <div>
+                        <div class="col-md-6">
                             <label for="judul" class="block font-medium text-sm text-gray-700 mb-1">Judul</label>
                             <input
                                 type="text"
@@ -44,7 +44,7 @@
                         </div>
 
                         <!-- Tanggal -->
-                        <div>
+                        <div class="col-md-6">
                             <label for="tanggal" class="block font-medium text-sm text-gray-700 mb-1">Tanggal</label>
                             <input
                                 type="date"
@@ -56,7 +56,7 @@
                         </div>
 
                         <!-- Isi Berita -->
-                        <div>
+                        <div class="col-12">
                             <label for="isi" class="block font-medium text-sm text-gray-700 mb-1">Isi</label>
                             <textarea
                                 name="isi"
@@ -67,7 +67,7 @@
                         </div>
 
                         <!-- Media -->
-                        <div>
+                        <div class="col-12">
                             <label for="media" class="block font-medium text-sm text-gray-700 mb-1">Media</label>
                             <input
                                 type="file"
@@ -76,16 +76,14 @@
                                 class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 accept="image/*,video/*"
                                 required>
-                            <small class="text-gray-500 block mt-1">File yang diizinkan: gambar (jpg, png, jpeg) atau video (mp4). Maksimal ukuran 2 MB.</small>
+                            <small class="text-gray-500 block mt-1">File yang diizinkan: gambar (jpg, png, jpeg). Maksimal ukuran 2 MB.</small>
                         </div>
 
                         <!-- Tombol Simpan -->
-                        <div class="mt-6">
-                            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 shadow-lg cursor-pointer">
-                                Simpan
-                            </button>
-                            <a href="{{ route('admin.berita.index') }}" class="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 shadow-lg cursor-pointer">
-                                Kembali
+                        <div class="col-12 text-right">
+                            <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Simpan Berita Baru</button>
+                            <a href="{{ route('admin.berita.index') }}">
+                                <button type="button" class="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Kembali</button>
                             </a>
                         </div>
                     </form>
