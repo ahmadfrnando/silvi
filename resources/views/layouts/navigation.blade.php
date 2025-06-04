@@ -5,33 +5,30 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('admin.dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" width="50" height="50"/>
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('aset.index')" :active="request()->routeIs('aset.*')">
+                    <x-nav-link :href="route('admin.aset.index')" :active="request()->routeIs('admin.aset.*')">
                         {{ __('Data Aset') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('jenis-barang.index')" :active="request()->routeIs('jenis-barang.*')">
+                    <x-nav-link :href="route('admin.jenis-barang.index')" :active="request()->routeIs('admin.jenis-barang.*')">
                         {{ __('Jenis Aset') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('merk.index')" :active="request()->routeIs('merk.*')">
+                    <x-nav-link :href="route('admin.merk.index')" :active="request()->routeIs('admin.merk.*')">
                         {{ __('Merk') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('statistik-penduduk.index')" :active="request()->routeIs('statistik-penduduk.*')">
+                    <x-nav-link :href="route('admin.statistik-penduduk.index')" :active="request()->routeIs('admin.statistik-penduduk.*')">
                         {{ __('Statistik Penduduk') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('berita.index')" :active="request()->routeIs('berita.*')">
+                    <x-nav-link :href="route('admin.berita.index')" :active="request()->routeIs('admin.berita.*')">
                         {{ __('Berita Desa') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('laporan.index')" :active="request()->routeIs('laporan.*')">
-                        {{ __('Laporan') }}
                     </x-nav-link>
                 </div>
 
@@ -53,7 +50,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('admin.profile.edit', Auth::user()->id)">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -86,7 +83,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
@@ -99,7 +96,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
+                <x-responsive-nav-link :href="route('admin.profile.edit', Auth::user()->id)">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
 

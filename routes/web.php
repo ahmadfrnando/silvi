@@ -1,48 +1,62 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\Guest\BeritaController as GuestBeritaController;
+
+// Tambahkan use controller yang kamu pakai di route
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\AsetController;
+use App\Http\Controllers\Admin\JenisBarangController;
+use App\Http\Controllers\Admin\MerkController;
+use App\Http\Controllers\Admin\BeritaController;
+use App\Http\Controllers\Admin\StatistikPendudukController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\LaporanController;
+
+use App\Http\Controllers\Superadmin\DashboardController as SuperDashboardController;
+use App\Http\Controllers\Superadmin\ProfileController as SuperProfileController;
+use App\Http\Controllers\Superadmin\AsetController as SuperAsetController;
+use App\Http\Controllers\Superadmin\MerkController as SuperMerkController;
+use App\Http\Controllers\Superadmin\JenisController as SuperJenisController;
+use App\Http\Controllers\Superadmin\UserController as SuperUserController;
+use App\Http\Controllers\Superadmin\LaporanController as SuperLaporanController;
 
 Route::get('/', function () {
-    return view('home', [
+    return view('guest.home', [
         'statistikPenduduk' => \App\Models\StatistikPenduduk::first(),
         'berita' => \App\Models\Berita::take(3)->get()
     ]);
 });
-Route::get('/detail/{berita}', function (\App\Models\Berita $berita) {
-    return view('detail-berita', [
-        'berita' => $berita
-    ]);
-})->name('detail-berita');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Tambahkan rute berikut
+Route::get('/detail/{id}', [GuestBeritaController::class, 'show'])->name('detail-berita');
 
-    Route::resource('aset', \App\Http\Controllers\AsetController::class);
-    Route::resource('jenis-barang', \App\Http\Controllers\JenisBarangController::class);
-    Route::resource('merk', \App\Http\Controllers\MerkController::class);
-    Route::resource('berita', \App\Http\Controllers\BeritaController::class);
-    Route::resource('statistik-penduduk', \App\Http\Controllers\StatistikPendudukController::class);
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('/laporan', [\App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
-    Route::get('/laporan/export-pdf', [\App\Http\Controllers\LaporanController::class, 'exportPdf'])->name('laporan.exportPdf');
-    Route::get('/laporan/export-excel', [\App\Http\Controllers\LaporanController::class, 'exportExcel'])->name('laporan.exportExcel');
-
+// Group untuk admin, tanpa Route::namespace()
+Route::middleware(['auth', 'checkrole:admin'])->name('admin.')->group(function () {
+    Route::resource('admin/profile', ProfileController::class)->only('edit', 'update', 'destroy');
+    Route::resource('admin/aset', AsetController::class)->only('index', 'create', 'store', 'edit', 'update', 'destroy');
+    Route::resource('admin/jenis-barang', JenisBarangController::class)->only('index', 'create', 'store', 'edit', 'update', 'destroy');
+    Route::resource('admin/merk', MerkController::class)->only('index', 'create', 'store', 'edit', 'update', 'destroy');
+    Route::resource('admin/berita', BeritaController::class)->only('index', 'create', 'show', 'store', 'edit', 'update', 'destroy');
+    Route::resource('admin/statistik-penduduk', StatistikPendudukController::class)->only('index', 'create', 'store', 'edit', 'update', 'destroy');
+    Route::get('/admin/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 });
+
+// Group untuk superadmin tanpa Route::namespace()
+Route::middleware(['auth', 'checkrole:super admin'])->name('super-admin.')->group(function () {
+    Route::resource('super-admin/dashboard', SuperDashboardController::class)->only('index');
+    Route::resource('super-admin/profile', SuperProfileController::class)->only('edit', 'update', 'destroy');
+    Route::resource('super-admin/aset', SuperAsetController::class)->only('index');
+    Route::resource('super-admin/merk', SuperMerkController::class)->only('index');
+    Route::resource('super-admin/jenis', SuperJenisController::class)->only('index');
+    Route::resource('super-admin/user', SuperUserController::class);
+    Route::resource('super-admin/laporan', SuperLaporanController::class)->only('index', 'store', 'create', 'destroy');
+    // Route::get('super-admin/laporan/export-pdf', [SuperLaporanController::class, 'exportPdf'])->name('laporan.exportPdf');
+    // Route::get('super-admin/laporan/export-excel', [SuperLaporanController::class, 'exportExcel'])->name('laporan.exportExcel');
+});
+
+Route::get('user/data', [\App\Http\Controllers\Superadmin\UserController::class, 'getData'])->name('user.data');
+Route::get('ajax-load/list-merk', [\App\Http\Controllers\AjaxLoadController::class, 'listMerk'])->name('ajax-load.merk');
+Route::get('ajax-load/list-jenis', [\App\Http\Controllers\AjaxLoadController::class, 'listJenis'])->name('ajax-load.jenis');
 
 require __DIR__ . '/auth.php';

@@ -13,9 +13,11 @@ class AsetChart extends Chart
         parent::__construct();
 
         // Ambil data dari database
-        $data = Aset::select('jenis', DB::raw('count(*) as total'))
-            ->groupBy('jenis')
-            ->pluck('total', 'jenis');
+        $data = Aset::selectRaw('jenis.nama_jenis, count(*) as total')
+            ->join('jenis_barang as jenis', 'jenis.id', '=', 'aset.id_jenis')
+            ->groupBy('jenis.nama_jenis')
+            ->get()
+            ->pluck('total', 'nama_jenis');
 
         // Konfigurasi chart dengan data dari database
         $this->title('Distribusi Aset Berdasarkan Jenis Barang')

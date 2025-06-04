@@ -29,7 +29,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
+        if (Auth::user() && Auth::user()->role != 'super admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif(Auth::user() && Auth::user()->role != 'super admsin') {
+            return redirect()->route('super-admin.dashboard.index');
+        } else {
+            Auth::guard('web')->logout();
+            return redirect()->route('login')->with('status', 'You are not authorized to access this page.');
+        }
     }
 
     /**

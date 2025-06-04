@@ -20,16 +20,16 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
-            'name' => 'admin',
-            'username' => 'admin',
-            'email' => 'admint@example.com',
-            'password' => bcrypt('password'),
+        // \App\Models\User::factory()->create([
+        //     'name' => 'admin',
+        //     'username' => 'admin',
+        //     'email' => 'admint@example.com',
+        //     'password' => bcrypt('password'),
+        // ]);
+        $this->call([
+            // JenisBarangSeeder::class,
+            // MerkSeeder::class,
+            AsetSeeder::class
         ]);
-
-        // JenisBarang::factory(10)->create();
-        // Merk::factory(15)->create();
-
-        // Aset::factory(50)->create();
     }
 }

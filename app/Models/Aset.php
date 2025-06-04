@@ -12,4 +12,19 @@ class Aset extends Model
     protected $table = 'aset';
 
     protected $guarded = [];
+
+    public function jenis()
+    {
+        return $this->belongsTo(JenisBarang::class, 'id_jenis', 'id');
+    }
+
+    public function merk()
+    {
+        return $this->belongsTo(Merk::class, 'id_merk', 'id');
+    }
+
+    public function kategori()
+    {
+        return $this->belongsTo(KategoriAset::class, 'id_kategori', 'id');
+    }
 }
