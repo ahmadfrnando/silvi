@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Superadmin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aset;
 use App\Models\Laporan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -65,46 +66,87 @@ class LaporanController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        $request->validate([
+            'nama_laporan' => 'required|string|max:255',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+            'keterangan' => 'nullable|string',
+        ]);
+
         try {
-            $request->validate([
-                'nama_laporan' => 'required|string|max:255',
-                'tanggal_mulai' => 'required|date',
-                'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-                'keterangan' => 'nullable|string',
-            ]);
-
-            Laporan::create([
-                'nama_laporan' => $request->input('nama_laporan'),
-                'tanggal_mulai' => $request->input('tanggal_mulai'),
-                'tanggal_selesai' => $request->input('tanggal_selesai'),
-                'keterangan' => $request->input('keterangan'),
-                'file_laporan_pdf' => $this->exportPdf($request->input('nama_laporan'), $request->input('tanggal_mulai'), $request->input('tanggal_selesai')),
-            ]);
-
-            return redirect()->route('super-admin.laporan.index')->with('success', 'Laporan berhasil digenerate!');
+            $file = $this->exportPdf($request->input('nama_laporan'), $request->input('tanggal_mulai'), $request->input('tanggal_selesai'));
+            if ($file['status'] == 'success') {
+                $file = $file['file'];
+                Laporan::create([
+                    'nama_laporan' => $request->input('nama_laporan'),
+                    'tanggal_mulai' => $request->input('tanggal_mulai'),
+                    'tanggal_selesai' => $request->input('tanggal_selesai'),
+                    'keterangan' => $request->input('keterangan'),
+                    'file_laporan_pdf' => $file
+                ]);
+                return redirect()->route('super-admin.laporan.index')->with('success', 'Laporan berhasil digenerate!');
+            } else {
+                return redirect()->back()->with('error', 'Gagal membuat laporan.' . $file['status'])->withInput();
+            }
         } catch (\Throwable $th) {
-            // var_dump($th);exit;
             return redirect()->back()->with('error', 'Gagal menambahkan data aset. Mohon coba lagi.' . $th->getMessage())->withInput();
         }
     }
 
     private function exportPdf($nama_laporan, $tanggal_mulai, $tanggal_selesai)
     {
-        $assets = \App\Models\Aset::where('tanggal', '>=', $tanggal_mulai)->where('tanggal', '<=', $tanggal_selesai)->get();
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('super-admin.laporan.pdf', compact('assets', 'tanggal_mulai', 'tanggal_selesai'));
-        $filename = $nama_laporan . '-' . uniqid() . '.pdf';
+        // $assets = \App\Models\Aset::where('tanggal', '>=', $tanggal_mulai)->where('tanggal', '<=', $tanggal_selesai)->get();
+        // dd($assets);
+        // $assets = Aset::with(['kategori', 'jenis', 'merk'])->where('tanggal', '>=', $tanggal_mulai)->where('tanggal', '<=', $tanggal_selesai)->get();
+        // $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('super-admin.laporan.pdf', compact('assets', 'tanggal_mulai', 'tanggal_selesai'));
+        // $filename = $nama_laporan . '-' . uniqid() . '.pdf';
 
-        Storage::put('public/laporan-pdf/' . $filename, $pdf->output());
-        $pdf->download($filename);
+        // Storage::put('public/laporan-pdf/' . $filename, $pdf->output());
+        // $pdf->download($filename);
+        // $pesan = [];
+        // $pesan = [
+        //     'file' => $filename,
+        //     'status' => 'success'
+        // ]
 
-        return $filename;
+        // return $filename;
+        $pesan = [];
+        try {
+            $assets = Aset::where('tanggal', '>=', $tanggal_mulai)->where('tanggal', '<=', $tanggal_selesai)->get();
+            foreach ($assets as $aset) {
+                $aset->nama_aset = ucwords($aset->nama_aset);
+                $aset->kategori = ucwords($aset->kategori->kategori ?? '-');
+                $aset->jenis = ucwords($aset->jenis->nama_jenis ?? '-');
+                $aset->merk = ucwords($aset->merk->nama_merk ?? '-');
+                $aset->keterangan = ucwords($aset->keterangan);
+                $aset->tanggal = date('d-m-Y', strtotime($aset->tanggal));
+                $aset->created_at = date('d-m-Y', strtotime($aset->created_at));
+            }
+            $tanggal_mulai = date('d-m-Y', strtotime($tanggal_mulai));
+            $tanggal_selesai = date('d-m-Y', strtotime($tanggal_selesai));
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('super-admin.laporan.pdf', compact('assets', 'tanggal_mulai', 'tanggal_selesai', 'nama_laporan'));
+            $filename = $nama_laporan . '-' . uniqid() . '.pdf';
+            Storage::put('public/laporan-pdf/' . $filename, $pdf->output());
+            $pesan = [
+                'file' => $filename,
+                'status' => 'success'
+            ];
+            return $pesan;
+        } catch (\Exception $e) {
+            // Tangani error, misalnya log error atau tampilkan pesan
+            $pesan = [
+                'file' => '',
+                'status' => 'error' . $e
+            ];
+            return $pesan;
+        }
     }
 
-    // private function exportExcel($nama_laporan, $tanggal_mulai, $tanggal_selesai)
-    // {
-    //     $filename = $nama_laporan . '-' . uniqid() . '.xlsx';
-    //     \Maatwebsite\Excel\Facades\Excel::store(new \App\Exports\AsetExport($tanggal_mulai, $tanggal_selesai), 'public/laporan-excel/' . $filename);
+    public function destroy($id)
+    {
+        $laporan = Laporan::findOrFail($id);
+        $laporan->delete();
 
-    //     return $filename;
-    // }
+        return redirect()->route('super-admin.laporan.index')->with('success', 'Laporan Data aset berhasil dihapus!');
+    }
 }

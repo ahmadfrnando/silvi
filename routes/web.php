@@ -73,7 +73,7 @@ Route::middleware(['auth', 'checkrole:super admin'])->name('super-admin.')->grou
     Route::resource('super-admin/merk', SuperMerkController::class)->only('index');
     Route::resource('super-admin/jenis', SuperJenisController::class)->only('index');
     Route::resource('super-admin/user', SuperUserController::class);
-    Route::resource('super-admin/laporan', SuperLaporanController::class)->only('index', 'store', 'create', 'destroy');
+    Route::resource('super-admin/laporan', SuperLaporanController::class)->only('index', 'store', 'create','destroy');
     // Route::get('super-admin/laporan/export-pdf', [SuperLaporanController::class, 'exportPdf'])->name('laporan.exportPdf');
     // Route::get('super-admin/laporan/export-excel', [SuperLaporanController::class, 'exportExcel'])->name('laporan.exportExcel');
 });
