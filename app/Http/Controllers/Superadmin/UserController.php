@@ -20,7 +20,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::select('id','name', 'email', 'username')->get();
+            $data = User::select('id','name', 'email', 'username')->where('role', '!=', 'super admin')->get();
             return DataTables::of($data)->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $editUrl = route('super-admin.user.edit', $row->id); // pastikan route butuh parameter id
