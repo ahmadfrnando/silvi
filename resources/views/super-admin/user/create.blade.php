@@ -17,10 +17,10 @@
             @endif
             <div class="bg-white shadow rounded-lg overflow-hidden">
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('super-admin.user.store') }}" method="POST" class="space-y-6">
+                    <form action="{{ route('super-admin.user.store') }}" method="POST" class="space-y-6 row">
                         @csrf
                         <!-- Nama user -->
-                        <div>
+                        <div class="col-12">
                             <label for="name" class="block font-medium text-sm text-gray-700 mb-1">Nama Pegawai</label>
                             <input
                                 type="text"
@@ -31,7 +31,7 @@
                                 placeholder="Masukkan nama pegawai"
                                 required>
                         </div>
-                        <div>
+                        <div class="col-md-6">
                             <label for="email" class="block font-medium text-sm text-gray-700 mb-1">Email Pegawai</label>
                             <input
                                 type="text"
@@ -42,7 +42,7 @@
                                 placeholder="Masukkan email pegawai"
                                 required>
                         </div>
-                        <div>
+                        <div class="col-md-6">
                             <label for="username" class="block font-medium text-sm text-gray-700 mb-1">Username</label>
                             <input
                                 type="text"
@@ -53,7 +53,7 @@
                                 placeholder="Masukkan username pegawai"
                                 required>
                         </div>
-                        <div>
+                        <div class="col-md-6">
                             <label for="password" class="block font-medium text-sm text-gray-700 mb-1">Password</label>
                             <input
                                 type="password"
@@ -63,7 +63,7 @@
                                 placeholder="Masukkan password pegawai"
                                 required>
                         </div>
-                        <div>
+                        <div class="col-md-6">
                             <label for="password_confirmation" class="block font-medium text-sm text-gray-700 mb-1">Konfirmasi Password</label>
                             <input
                                 type="password"
