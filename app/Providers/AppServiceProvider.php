@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $websiteName = StatistikPenduduk::first()->nama_desa; // Sesuaikan dengan model dan kolom yang sesuai
+        $websiteName = StatistikPenduduk::first()->nama_desa ?? ''; // Sesuaikan dengan model dan kolom yang sesuai
         View::share('websiteName', $websiteName);
     }
 }

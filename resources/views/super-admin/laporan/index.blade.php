@@ -20,7 +20,6 @@
                                 <th width="50px">No.</th>
                                 <th>Nama Laporan</th>
                                 <th>Periode Laporan</th>
-                                <th>Tanggal Generate Laporan</th>
                                 <th>File</th>
                                 <th width="200px">Keterangan</th>
                                 <th width="100px">Aksi</th>
@@ -52,10 +51,6 @@
                     {
                         data: 'tanggal',
                         name: 'tanggal'
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
                     },
                     {
                         data: 'laporan',

@@ -30,20 +30,50 @@
                             <!-- Jumlah Penduduk -->
                             <div class="p-4 bg-white mb-4 shadow rounded-lg flex items-center space-x-4">
                                 <i class="fas fa-users text-green-500 text-2xl"></i>
-                                <p><strong>Jumlah Penduduk:</strong> {{ $statistikPenduduk->jumlah_penduduk ?? '-' }}</p>
+                                <p><strong>Jumlah Penduduk:</strong> {{ $statistikPenduduk->jumlah_penduduk ?? '-' }} Jiwa</p>
                             </div>
 
                             <!-- Jumlah Laki-laki -->
                             <div class="p-4 bg-white mb-4 shadow rounded-lg flex items-center space-x-4">
                                 <i class="fas fa-male text-blue-500 text-2xl"></i>
-                                <p><strong>Laki-laki:</strong> {{ $statistikPenduduk->jumlah_laki_laki ?? '-' }}</p>
+                                <p><strong>Laki-laki:</strong> {{ $statistikPenduduk->jumlah_laki_laki ?? '-' }} Jiwa</p>
                             </div>
 
                             <!-- Jumlah Perempuan -->
                             <div class="p-4 bg-white mb-4 shadow rounded-lg flex items-center space-x-4">
                                 <i class="fas fa-female text-pink-500 text-2xl"></i>
-                                <p><strong>Perempuan:</strong> {{ $statistikPenduduk->jumlah_perempuan ?? '-' }}</p>
+                                <p><strong>Perempuan:</strong> {{ $statistikPenduduk->jumlah_perempuan ?? '-' }} Jiwa</p>
                             </div>
+                        </div>
+                        <div class="col-12 mt-6">
+                            <table class="table-auto w-full">
+                                <thead>
+                                    <tr class="bg-green-100">
+                                        <th class="border px-4 py-2">No</th>
+                                        <th class="border px-4 py-2">Dusun</th>
+                                        <th class="border px-4 py-2">Jumlah Penduduk Pria</th>
+                                        <th class="border px-4 py-2">Jumlah Penduduk Wanita</th>
+                                        <th class="border px-4 py-2">Jumlah Seluruh Penduduk</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($dusun as $key => $i)
+                                    <tr>
+                                        <td class="border px-4 py-2">{{ $key + 1 }}</td>
+                                        <td class="border px-4 py-2">{{$i->nama_dusun}}</td>
+                                        <td class="border px-4 py-2">{{ $i->pria }} Jiwa</td>
+                                        <td class="border px-4 py-2">{{ $i->wanita }} Jiwa</td>
+                                        <td class="border px-4 py-2">{{ $i->total }} Jiwa</td>
+                                    </tr>
+                                    @endforeach
+                                    <tr class="font-extrabold bg-gray-100">
+                                        <td colspan="2" class="border px-4 py-2">Total</td>
+                                        <td class="border px-4 py-2">{{ $dusun->sum('pria') }} Jiwa</td>
+                                        <td class="border px-4 py-2">{{ $dusun->sum('wanita') }} Jiwa</td>
+                                        <td class="border px-4 py-2">{{ $dusun->sum('total') }} Jiwa</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 

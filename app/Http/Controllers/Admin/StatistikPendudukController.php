@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\StatistikPenduduk;
+use App\Models\StatistikPerdusun;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -23,7 +24,10 @@ class StatistikPendudukController extends Controller
         } else {
             $statistikPenduduk = null;
         }
-        return view('admin.statistik-penduduk.index', compact('statistikPenduduk'));
+        $dusun = StatistikPerdusun::orderBy('nomor_dusun', 'asc')
+            ->whereIn('nomor_dusun', [1, 2, 3, 4])
+            ->get();
+        return view('admin.statistik-penduduk.index', compact('statistikPenduduk', 'dusun'));
     }
 
 
@@ -81,7 +85,24 @@ class StatistikPendudukController extends Controller
     public function edit($id)
     {
         $statistikPenduduk = StatistikPenduduk::findOrFail($id);
-        return view('admin.statistik-penduduk.edit', compact('statistikPenduduk'));
+        $dusun = StatistikPerdusun::orderBy('nomor_dusun', 'asc')
+            ->whereIn('nomor_dusun', [1, 2, 3, 4])
+            ->get();
+        $statistikDusun = [
+            'nama_dusun_1' => $dusun[0]->nama_dusun,
+            'nama_dusun_2' => $dusun[1]->nama_dusun,
+            'nama_dusun_3' => $dusun[2]->nama_dusun,
+            'nama_dusun_4' => $dusun[3]->nama_dusun,
+            'dusun_1_pria' => $dusun[0]->pria,
+            'dusun_1_wanita' => $dusun[0]->wanita,
+            'dusun_2_pria' => $dusun[1]->pria,
+            'dusun_2_wanita' => $dusun[1]->wanita,
+            'dusun_3_pria' => $dusun[2]->pria,
+            'dusun_3_wanita' => $dusun[2]->wanita,
+            'dusun_4_pria' => $dusun[3]->pria,
+            'dusun_4_wanita' => $dusun[3]->wanita,
+        ];
+        return view('admin.statistik-penduduk.edit', compact('statistikPenduduk', 'statistikDusun'));
     }
 
     /**
@@ -96,14 +117,34 @@ class StatistikPendudukController extends Controller
         try {
             $validatedData = $request->validate([
                 'nama_desa' => 'required|string|max:255',
-                'jumlah_penduduk' => 'required|integer|min:0',
-                'jumlah_laki_laki' => 'required|integer|min:0',
-                'jumlah_perempuan' => 'required|integer|min:0',
+                'nama_dusun_1' => 'required|string|max:255',
+                'nama_dusun_2' => 'required|string|max:255',
+                'nama_dusun_3' => 'required|string|max:255',
+                'nama_dusun_4' => 'required|string|max:255',
+                'dusun_1_pria' => 'required|integer',
+                'dusun_1_wanita' => 'required|integer',
+                'dusun_2_pria' => 'required|integer',
+                'dusun_2_wanita' => 'required|integer',
+                'dusun_3_pria' => 'required|integer',
+                'dusun_3_wanita' => 'required|integer',
+                'dusun_4_pria' => 'required|integer',
+                'dusun_4_wanita' => 'required|integer',
                 // 'kordinat' => 'required|string',
             ]);
 
             $statistikPenduduk = StatistikPenduduk::findOrFail($id);
-            $statistikPenduduk->update($validatedData);
+            $statistikPenduduk->update([
+                'nama_desa' => $validatedData['nama_desa']
+            ]);
+            for ($i = 1; $i <= 4; $i++) {
+                $dusun = StatistikPerdusun::where('nomor_dusun', $i)->first();
+                $dusun->update([
+                    'nama_dusun' => $validatedData['nama_dusun_' . $i],
+                    'total' => $validatedData['dusun_' . $i . '_pria'] + $validatedData['dusun_' . $i . '_wanita'],
+                    'pria' => $validatedData['dusun_' . $i . '_pria'],
+                    'wanita' => $validatedData['dusun_' . $i . '_wanita'],
+                ]);
+            }
 
             return redirect()->route('admin.statistik-penduduk.index')->with('success', 'Statistik Penduduk berhasil diperbarui!');
         } catch (\Illuminate\Validation\ValidationException $e) {
@@ -111,6 +152,7 @@ class StatistikPendudukController extends Controller
                 ->withErrors($e->validator)
                 ->withInput();
         } catch (\Exception $e) {
+            // dd($e->getMessage());
             return redirect()->back()->with('error', 'Terjadi kesalahan saat memperbarui data.'. $e->getMessage())->withInput();
         }
     }

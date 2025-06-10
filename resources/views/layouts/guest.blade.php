@@ -35,7 +35,7 @@
                 <a href="/" class="text-green-600 hover:text-green-800">Jelajahi Desa</a>
                 <a href="#peta" class="text-green-600 hover:text-green-800">Peta Desa</a>
                 <a href="#berita" class="text-green-600 hover:text-green-800">Berita</a>
-                <!-- <a href="{{ route('login') }}" class="text-green-600 hover:text-green-800">Login</a> -->
+                <a href="{{ route('login') }}" class="text-green-600 hover:text-green-800">Login</a>
             </nav>
         </div>
     </header>
