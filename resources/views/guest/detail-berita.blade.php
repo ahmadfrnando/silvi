@@ -45,6 +45,7 @@
                     <div class="text-gray-700 text-justify leading-relaxed mb-6">
                         {{ $berita->isi }}
                     </div>
+                    <a href="{{ $berita->link_sumber }}" class="text-blue-500 hover:underline" target="_blank">Sumber berita</a>
                 </div>
             </div>
         </div>

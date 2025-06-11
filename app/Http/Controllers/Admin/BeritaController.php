@@ -92,6 +92,7 @@ class BeritaController extends Controller
                 'isi' => 'required|string',
                 'tanggal' => 'required|date',
                 'media' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'link_sumber' => 'nullable|url',
             ]);
 
             if ($request->hasFile('media')) {

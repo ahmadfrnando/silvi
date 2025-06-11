@@ -27,7 +27,7 @@ use App\Http\Controllers\Superadmin\LaporanController as SuperLaporanController;
 Route::get('/', function () {
     return view('guest.home', [
         'statistikPenduduk' => \App\Models\StatistikPenduduk::first(),
-        'berita' => \App\Models\Berita::take(3)->get()
+        'berita' => \App\Models\Berita::paginate(6),
     ]);
 });
 

@@ -54,6 +54,17 @@
                                 class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                                 required>
                         </div>
+                        <div class="col-12">
+                            <label for="link_sumber" class="block font-medium text-sm text-gray-700 mb-1">Link Sumber</label>
+                            <input
+                                type="text"
+                                name="link_sumber"
+                                id="link_sumber"
+                                value="{{ old('link_sumber') }}"
+                                class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                placeholder="Masukkan link sumber berita"
+                                required>
+                        </div>
 
                         <!-- Isi Berita -->
                         <div class="col-12">
