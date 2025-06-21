@@ -59,6 +59,38 @@
                     <p class="text-gray-700">Perempuan</p>
                 </div>
             </div>
+            <div class="mt-4 p-6 bg-white shadow-lg rounded-lg">
+                <div class="col-12 mt-6">
+                    <table class="table-auto w-full">
+                        <thead>
+                            <tr class="bg-green-100">
+                                <th class="border px-4 py-2">No</th>
+                                <th class="border px-4 py-2">Dusun</th>
+                                <th class="border px-4 py-2">Jumlah Penduduk Pria</th>
+                                <th class="border px-4 py-2">Jumlah Penduduk Wanita</th>
+                                <th class="border px-4 py-2">Jumlah Seluruh Penduduk</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($dusun as $key => $i)
+                            <tr>
+                                <td class="border px-4 py-2">{{ $key + 1 }}</td>
+                                <td class="border px-4 py-2">{{$i->nama_dusun}}</td>
+                                <td class="border px-4 py-2">{{ $i->pria }} Jiwa</td>
+                                <td class="border px-4 py-2">{{ $i->wanita }} Jiwa</td>
+                                <td class="border px-4 py-2">{{ $i->total }} Jiwa</td>
+                            </tr>
+                            @endforeach
+                            <tr class="font-extrabold bg-gray-100">
+                                <td colspan="2" class="border px-4 py-2">Total</td>
+                                <td class="border px-4 py-2">{{ $dusun->sum('pria') }} Jiwa</td>
+                                <td class="border px-4 py-2">{{ $dusun->sum('wanita') }} Jiwa</td>
+                                <td class="border px-4 py-2">{{ $dusun->sum('total') }} Jiwa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
 

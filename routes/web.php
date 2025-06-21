@@ -28,6 +28,9 @@ Route::get('/', function () {
     return view('guest.home', [
         'statistikPenduduk' => \App\Models\StatistikPenduduk::first(),
         'berita' => \App\Models\Berita::paginate(6),
+        'dusun' => \App\Models\StatistikPerdusun::orderBy('nomor_dusun', 'asc')
+            ->whereIn('nomor_dusun', [1, 2, 3, 4])
+            ->get(),
     ]);
 });
 
