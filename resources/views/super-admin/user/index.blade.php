@@ -4,7 +4,7 @@
             {{ __('Akun Pengguna') }}
         </h2>
     </x-slot>
-    
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow rounded-lg">
@@ -14,7 +14,7 @@
                         <i class="bi bi-plus-circle"></i> Tambah Akun
                     </a>
                     <!-- Tabel Data Merk -->
-                    <table class="table table-striped table-bordered datatable">
+                    <table id="datatable" class="table table-striped table-bordered datatable">
                         <thead>
                             <tr>
                                 <th>No.</th>
@@ -33,10 +33,14 @@
     @push('scripts')
     <script type="text/javascript">
         $(function() {
-            var table = $('.datatable').DataTable({
+            var table = $('#datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('super-admin.user.index') }}",
+                // ajax: "{{ route('super-admin.user.index') }}",
+                ajax: {
+                    url: "{{ route('super-admin.user.index') }}",
+                    type: "GET"
+                },
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',

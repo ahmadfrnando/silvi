@@ -130,7 +130,6 @@
             });
 
             $('#id_merk').select2({
-                minimumInputLength: 2,
                 placeholder: 'Pilih Merk',
                 allowClear: true,
                 width: 'resolve',
@@ -151,7 +150,6 @@
                 }
             });
             $('#id_jenis').select2({
-                minimumInputLength: 2,
                 placeholder: 'Pilih Jenis',
                 allowClear: true,
                 width: 'resolve',
