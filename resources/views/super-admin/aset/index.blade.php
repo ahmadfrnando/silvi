@@ -13,11 +13,12 @@
                         <thead>
                             <tr>
                                 <th width="50px">No.</th>
+                                <th>Tanggal</th>
+                                <th>Sumber Aset</th>
                                 <th>Nama Aset</th>
                                 <th>Jenis Aset</th>
                                 <th>Kategori Aset</th>
                                 <th>Merk Aset</th>
-                                <th>Tanggal</th>
                                 <th>Jumlah</th>
                                 <th>keterangan</th>
                             </tr>
@@ -42,6 +43,14 @@
                         searchable: false
                     },
                     {
+                        data: 'tanggal',
+                        name: 'tanggal'
+                    },
+                    {
+                        data: 'sumber_aset',
+                        name: 'sumber_aset'
+                    },
+                    {
                         data: 'nama_aset',
                         name: 'nama_aset'
                     },
@@ -57,10 +66,6 @@
                     {
                         data: 'merk',
                         name: 'merk'
-                    },
-                    {
-                        data: 'tanggal',
-                        name: 'tanggal'
                     },
                     {
                         data: 'jumlah',

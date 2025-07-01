@@ -19,6 +19,7 @@
                             <tr>
                                 <th width="50px">No.</th>
                                 <th>Tanggal</th>
+                                <th>Sumber Aset</th>
                                 <th>Nama Aset</th>
                                 <th>Kategori</th>
                                 <th>Jenis Aset</th>
@@ -51,6 +52,10 @@
                         data: 'tanggal',
                         name: 'tanggal',
                         searchable: false
+                    },
+                    {
+                        data: 'sumber_aset',
+                        name: 'sumber_aset'
                     },
                     {
                         data: 'nama_aset',

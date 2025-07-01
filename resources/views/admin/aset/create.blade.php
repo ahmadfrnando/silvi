@@ -94,6 +94,18 @@
                                 required>
                         </div>
 
+                        <!-- sumber aset -->
+                        <div class="col-12">
+                            <label for="sumber_aset" class="block font-medium text-sm text-gray-700 mb-1">Sumber Aset</label>
+                            <input
+                                type="text"
+                                name="sumber_aset"
+                                id="sumber_aset"
+                                class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                placeholder="Masukkan sumber aset"
+                                required>
+                        </div>
+
                         <!-- Keterangan -->
                         <div class="col-12">
                             <label for="keterangan" class="block font-medium text-sm text-gray-700 mb-1">Keterangan</label>
