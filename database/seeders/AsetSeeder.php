@@ -18,122 +18,44 @@ class AsetSeeder extends Seeder
     {
         $jenisMap = DB::table('jenis_barang')->pluck('id', 'nama_jenis')->toArray();
         $merkMap = DB::table('merk')->pluck('id', 'nama_merk')->toArray();
-        $data = [
-            [
-                'nama_aset' => 'Motor Dinas RW',
-                'jenis' => 'Kendaraan',
-                'merk' => 'Honda',
-                'jumlah' => 2,
-                'keterangan' => 'Digunakan untuk operasional kepala RW',
-                'tanggal' => '2023-03-15',
-                'id_kategori' => 2
-            ],
-            [
-                'nama_aset' => 'Tanah Lapangan Desa',
-                'jenis' => 'Tanah',
-                'merk' => '-',
-                'jumlah' => 1,
-                'keterangan' => 'Lapangan serbaguna milik desa',
-                'tanggal' => '2010-05-10',
-                'id_kategori' => 1
-            ],
-            [
-                'nama_aset' => 'Laptop Sekretariat',
-                'jenis' => 'Komputer & Elektronik',
-                'merk' => 'Asus',
-                'jumlah' => 1,
-                'keterangan' => 'Laptop digunakan untuk pengetikan surat menyurat',
-                'tanggal' => '2021-08-20',
-                'id_kategori' => 2
-            ],
-            [
-                'nama_aset' => 'Printer Kantor Desa',
-                'jenis' => 'Komputer & Elektronik',
-                'merk' => 'Epson',
-                'jumlah' => 1,
-                'keterangan' => 'Untuk mencetak dokumen administrasi',
-                'tanggal' => '2022-01-10',
-                'id_kategori' => 2
-            ],
-            [
-                'nama_aset' => 'Traktor Mini Pertanian',
-                'jenis' => 'Peralatan dan Mesin',
-                'merk' => 'Kubota',
-                'jumlah' => 1,
-                'keterangan' => 'Digunakan untuk menunjang pertanian warga',
-                'tanggal' => '2019-11-04',
-                'id_kategori' => 2
-            ],
-            [
-                'nama_aset' => 'Bangunan Posyandu',
-                'jenis' => 'Bangunan',
-                'merk' => '-',
-                'jumlah' => 1,
-                'keterangan' => 'Gedung posyandu Balita dan lansia',
-                'tanggal' => '2015-07-01',
-                'id_kategori' => 1
-            ],
-            [
-                'nama_aset' => 'Software Administrasi',
-                'jenis' => 'Aset Tak Berwujud',
-                'merk' => '-',
-                'jumlah' => 1,
-                'keterangan' => 'Lisensi aplikasi keuangan desa',
-                'tanggal' => '2020-12-12',
-                'id_kategori' => 3
-            ],
-            [
-                'nama_aset' => 'Mesin Pompa Irigasi',
-                'jenis' => 'Irigasi',
-                'merk' => 'Yanmar',
-                'jumlah' => 1,
-                'keterangan' => 'Untuk kebutuhan pengairan sawah',
-                'tanggal' => '2018-09-10',
-                'id_kategori' => 1
-            ],
-            [
-                'nama_aset' => 'Meja dan Kursi Kantor',
-                'jenis' => 'Perabot',
-                'merk' => '-',
-                'jumlah' => 10,
-                'keterangan' => 'Meja kursi kayu untuk staf dan perangkat',
-                'tanggal' => '2017-04-17',
-                'id_kategori' => 1
-            ],
-            [
-                'nama_aset' => 'Mobil Operasional Desa',
-                'jenis' => 'Kendaraan',
-                'merk' => 'Toyota',
-                'jumlah' => 1,
-                'keterangan' => 'Mobil untuk kegiatan operasional pemerintah desa',
-                'tanggal' => '2023-02-01',
-                'id_kategori' => 2
-            ],
+
+        $aset_desa = [
+            ['nama_aset' => 'Laptop', 'jumlah' => 5, 'keterangan' => 'Digunakan untuk administrasi desa', 'id_kategori' => 2, 'id_merk' => 22, 'id_jenis' => 21],
+            ['nama_aset' => 'Printer', 'jumlah' => 2, 'keterangan' => 'Printer untuk mencetak dokumen warga', 'id_kategori' => 2, 'id_merk' => 24, 'id_jenis' => 21],
+            ['nama_aset' => 'Proyektor', 'jumlah' => 1, 'keterangan' => 'Untuk kegiatan penyuluhan masyarakat', 'id_kategori' => 2, 'id_merk' => 24, 'id_jenis' => 21],
+            ['nama_aset' => 'Sound System', 'jumlah' => 3, 'keterangan' => 'Digunakan saat rapat warga', 'id_kategori' => 2, 'id_merk' => null, 'id_jenis' => 17],
+            ['nama_aset' => 'Meja Kantor', 'jumlah' => 10, 'keterangan' => 'Untuk keperluan pegawai kantor desa', 'id_kategori' => 1, 'id_merk' => null, 'id_jenis' => 15],
+            ['nama_aset' => 'Kursi Kantor', 'jumlah' => 15, 'keterangan' => 'Ditempatkan di ruang kerja desa', 'id_kategori' => 1, 'id_merk' => null, 'id_jenis' => 15],
+            ['nama_aset' => 'Lemari Arsip', 'jumlah' => 4, 'keterangan' => 'Untuk menyimpan dokumen penting', 'id_kategori' => 1, 'id_merk' => null, 'id_jenis' => 15],
+            ['nama_aset' => 'AC', 'jumlah' => 2, 'keterangan' => 'Dipakai di ruang kepala desa', 'id_kategori' => 1, 'id_merk' => null, 'id_jenis' => 17],
+            ['nama_aset' => 'Motor Dinas', 'jumlah' => 2, 'keterangan' => 'Untuk operasional lapangan', 'id_kategori' => 2, 'id_merk' => 18, 'id_jenis' => 16],
+            ['nama_aset' => 'Genset', 'jumlah' => 1, 'keterangan' => 'Cadangan listrik saat mati lampu', 'id_kategori' => 4, 'id_merk' => 26, 'id_jenis' => 17],
+            ['nama_aset' => 'TV LED', 'jumlah' => 1, 'keterangan' => 'Digunakan saat sosialisasi digital', 'id_kategori' => 2, 'id_merk' => 23, 'id_jenis' => 21],
+            ['nama_aset' => 'Alat Fogging', 'jumlah' => 1, 'keterangan' => 'Untuk pemberantasan nyamuk', 'id_kategori' => 4, 'id_merk' => null, 'id_jenis' => 17],
+            ['nama_aset' => 'Pompa Air', 'jumlah' => 1, 'keterangan' => 'Untuk pengairan taman desa', 'id_kategori' => 4, 'id_merk' => null, 'id_jenis' => 17],
+            ['nama_aset' => 'Tenda Lipat', 'jumlah' => 5, 'keterangan' => 'Dipakai saat kegiatan desa', 'id_kategori' => 2, 'id_merk' => null, 'id_jenis' => 17],
+            ['nama_aset' => 'Tong Sampah', 'jumlah' => 30, 'keterangan' => 'Untuk kebersihan lingkungan desa', 'id_kategori' => 1, 'id_merk' => null, 'id_jenis' => 15],
+            ['nama_aset' => 'Sepeda Dinas', 'jumlah' => 2, 'keterangan' => 'Dinas lapangan dan pemeriksaan', 'id_kategori' => 2, 'id_merk' => 19, 'id_jenis' => 16],
+            ['nama_aset' => 'Pohon Pelindung', 'jumlah' => 100, 'keterangan' => 'Pohon untuk penghijauan', 'id_kategori' => 3, 'id_merk' => null, 'id_jenis' => 14],
+            ['nama_aset' => 'Perahu', 'jumlah' => 1, 'keterangan' => 'Untuk transportasi warga di sungai desa', 'id_kategori' => 2, 'id_merk' => null, 'id_jenis' => 16],
+            ['nama_aset' => 'Alat Musik Tradisional', 'jumlah' => 3, 'keterangan' => 'Untuk acara budaya desa', 'id_kategori' => 3, 'id_merk' => null, 'id_jenis' => 23],
         ];
 
-        foreach ($data as $item) {
-            // Validasi id_jenis, jika tidak ditemukan, throw error agar tahu datanya salah
-            if (!isset($jenisMap[$item['jenis']])) {
-                throw new \Exception("Jenis '{$item['jenis']}' tidak ditemukan di tabel jenis.");
-            }
-            $id_jenis = $jenisMap[$item['jenis']];
-
-            // Ambil id_merk jika ada dan merk bukan '-'
-            $id_merk = null;
-            if ($item['merk'] !== '-' && isset($merkMap[$item['merk']])) {
-                $id_merk = $merkMap[$item['merk']];
-            }
+        foreach ($aset_desa as $aset) {
+            // Menghasilkan tanggal acak antara 2024 dan 2025
+            $randomDate = Carbon::createFromFormat('Y-m-d', rand(2024, 2025) . '-' . rand(1, 12) . '-' . rand(1, 28));
 
             DB::table('aset')->insert([
-                'nama_aset' => $item['nama_aset'],
-                'id_jenis' => $id_jenis,
-                'id_merk' => $id_merk,
-                'jumlah' => $item['jumlah'],
-                'keterangan' => $item['keterangan'],
-                'tanggal' => $item['tanggal'],
-                'id_kategori' => $item['id_kategori'],
+                'nama_aset' => $aset['nama_aset'],
+                'jumlah' => $aset['jumlah'],
+                'keterangan' => $aset['keterangan'],
                 'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
+                'updated_at' => Carbon::now(),
+                'tanggal' => $randomDate->format('Y-m-d'),
+                'id_kategori' => $aset['id_kategori'],
+                'id_merk' => $aset['id_merk'],
+                'id_jenis' => $aset['id_jenis'],
+                'sumber_aset' => 'APBD Desa',
             ]);
         }
     }

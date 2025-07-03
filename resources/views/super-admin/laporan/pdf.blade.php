@@ -75,6 +75,7 @@
             <tr>
                 <th>No</th>
                 <th>Tanggal</th>
+                <th>Sumber Dana</th>
                 <th>Nama Aset</th>
                 <th>Kategori</th>
                 <th>Jenis</th>
@@ -87,6 +88,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $asset->tanggal }}</td>
+                <td>{{ $asset->sumber_aset }}</td>
                 <td>{{ $asset->nama_aset }}</td>
                 <td>{{ $asset->kategori }}</td>
                 <td>{{ $asset->jenis }}</td>
