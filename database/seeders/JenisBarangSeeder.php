@@ -26,7 +26,6 @@ class JenisBarangSeeder extends Seeder
             ['nama_jenis' => 'Perabot', 'keterangan' => 'Meja, kursi, lemari, dan perabot lainnya'],
             ['nama_jenis' => 'Komputer & Elektronik', 'keterangan' => 'Laptop, printer, proyektor, dll'],
             ['nama_jenis' => 'Dokumen & Arsip', 'keterangan' => 'Dokumen penting dan arsip desa'],
-            ['nama_jenis' => 'Aset Tak Berwujud', 'keterangan' => 'Seperti hak paten, software, lisensi'],
         ];
 
         foreach ($data as $item) {
