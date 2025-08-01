@@ -20,7 +20,7 @@ class AsetController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Aset::select('*')->get();
+            $data = Aset::select('*')->orderBy('id', 'desc')->get();
 
             return DataTables::of($data)->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -83,6 +83,7 @@ class AsetController extends Controller
                 'keterangan' => 'nullable|string',
                 'id_kategori' => 'required|integer|exists:ref_kategori_aset,id',
                 'tanggal' => 'required|date',
+                'sumber_aset' => 'required|string',
                 'is_tidak_ada_merk' => 'nullable|boolean',
             ]);
 
@@ -98,6 +99,7 @@ class AsetController extends Controller
                 'keterangan',
                 'id_kategori',
                 'tanggal',
+                'sumber_aset',
             ]);
 
 
@@ -157,6 +159,7 @@ class AsetController extends Controller
                 'keterangan' => 'nullable|string',
                 'id_kategori' => 'required|integer|exists:ref_kategori_aset,id',
                 'tanggal' => 'required|date',
+                'sumber_aset' => 'required|string',
                 'is_tidak_ada_merk' => 'nullable|boolean',
             ]);
 
@@ -172,6 +175,7 @@ class AsetController extends Controller
                 'keterangan',
                 'id_kategori',
                 'tanggal',
+                'sumber_aset',
             ]);
 
             $asset = Aset::findOrFail($id);

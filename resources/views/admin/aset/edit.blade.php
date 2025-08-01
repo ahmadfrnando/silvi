@@ -98,6 +98,18 @@
                                 required>
                         </div>
 
+                        <div class="col-12">
+                            <label for="sumber_aset" class="block font-medium text-sm text-gray-700 mb-1">Sumber Aset</label>
+                            <input
+                                type="text"
+                                name="sumber_aset"
+                                id="sumber_aset"
+                                value="{{ $aset->sumber_aset }}"
+                                class="w-full border-gray-300 rounded-lg shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                                placeholder="Masukkan sumber aset"
+                                required>
+                        </div>
+
                         <!-- Keterangan -->
                         <div class="col-md-12">
                             <label for="keterangan" class="block font-medium text-sm text-gray-700 mb-1">Keterangan</label>
@@ -133,12 +145,14 @@
                 }
             });
 
-            $('#id_merk').select2({
-                minimumInputLength: 2,
+           $('#id_merk').select2({
                 placeholder: 'Pilih Merk',
                 allowClear: true,
                 width: 'resolve',
-                language: "id",
+                data: [{
+                    id: '{{ $aset->merk ? $aset->merk->id : '' }}',
+                    text: '{{ $aset->merk ? $aset->merk->nama_merk  : '' }}'
+                }],
                 ajax: {
                     url: route('ajax-load.merk'),
                     dataType: 'json',
@@ -146,7 +160,7 @@
                         return {
                             results: data.map(res => {
                                 return {
-                                    text: res.nama_merk ?? '',
+                                    text: res.nama_merk,
                                     id: res.id
                                 }
                             })
@@ -155,11 +169,13 @@
                 }
             });
             $('#id_jenis').select2({
-                minimumInputLength: 2,
                 placeholder: 'Pilih Jenis',
                 allowClear: true,
                 width: 'resolve',
-                language: "id",
+                data: [{
+                    id: '{{ $aset->jenis->id }}',
+                    text: '{{ $aset->jenis->nama_jenis }}'
+                }],
                 ajax: {
                     url: route('ajax-load.jenis'),
                     dataType: 'json',
@@ -175,23 +191,24 @@
                     }
                 }
             });
-            var jenisId = '{{ $aset->id_jenis }}';
-            var jenisNama = '{{ $aset->jenis->nama_jenis }}';
+            // var jenisId = '{{ $aset->id_jenis }}';
+            // var jenisNama = '{{ $aset->jenis->nama_jenis }}';
 
-            if (jenisId) {
-                // Buat option baru dan trigger select2 untuk preselect
-                var option = new Option(jenisNama, jenisId, true, true);
-                $('#id_jenis').append(option).trigger('change');
-            }
+            // if (jenisId) {
+            //     // Buat option baru dan trigger select2 untuk preselect
+            //     var option = new Option(jenisNama, jenisId, true, true);
+            //     $('#id_jenis').append(option).trigger('change');
+            // }
 
-            var merkId = '{{ $aset->id_merk }}';
-            var merkNama = '{{ $aset->merk->nama_merk ?? '' }}';
+            // var merkId = '{{ $aset->id_merk }}';
+            // var merkNama = '{{ $aset->merk->nama_merk ?? '
+            // ' }}';
 
-            if (merkId) {
-                // Buat option baru dan trigger select2 untuk preselect
-                var option = new Option(merkNama, merkId, true, true);
-                $('#id_merk').append(option).trigger('change');
-            }
+            // if (merkId) {
+            //     // Buat option baru dan trigger select2 untuk preselect
+            //     var option = new Option(merkNama, merkId, true, true);
+            //     $('#id_merk').append(option).trigger('change');
+            // }
         });
     </script>
     @endpush
